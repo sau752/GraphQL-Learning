@@ -29,3 +29,14 @@ query ExampleQuery($categoryId: String!) {
 }
 
 ----------------------- Queries ------------------------- */
+
+/* ----------------------- Mutation ----------------------
+
+mutation {
+  addCategory(input: { name: "Test Category" }) {
+    id
+    name
+  }
+}
+
+----------------------- Mutation ------------------------- */

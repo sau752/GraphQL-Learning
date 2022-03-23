@@ -1,5 +1,3 @@
-const { products, categories } = require("../db");
-
 exports.Query = {
   fruits: () => {
     return "mango";
@@ -16,8 +14,8 @@ exports.Query = {
   animals: () => {
     return ["cat", "dog"];
   },
-  products: (parent, { filter }, context) => {
-    let filteredProducts = products;
+  products: (parent, { filter }, { db }) => {
+    let filteredProducts = db.products;
     if (filter) {
       if (filter.onSale) {
         filteredProducts = filteredProducts.filter((product) => {
@@ -31,13 +29,13 @@ exports.Query = {
     }
     return filteredProducts;
   },
-  product: (parent, args, context) => {
+  product: (parent, args, { db }) => {
     const { id } = args;
-    return products.find((p) => p.id === id);
+    return db.products.find((p) => p.id === id);
   },
-  categories: () => categories,
-  category: (parent, args, context) => {
+  categories: (parent, args, { db }) => db.categories,
+  category: (parent, args, { db }) => {
     const { id } = args;
-    return categories.find((c) => c.id === id);
+    return db.categories.find((c) => c.id === id);
   },
 };
